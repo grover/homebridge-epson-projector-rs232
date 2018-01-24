@@ -26,7 +26,6 @@ class ProjectorBulbService {
   }
 
   async update(powerStatus) {
-    this.log('Refresh projector bulb status');
     this._updatePowerState(powerStatus);
     await this._refreshLampHours();
 

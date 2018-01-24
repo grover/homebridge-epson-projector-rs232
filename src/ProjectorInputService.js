@@ -34,8 +34,6 @@ class ProjectorInputService {
   }
 
   async update() {
-    this.log('Refresh projector source status');
-
     const status = await this._device.execute(`SOURCE?`);
     const matches = this._sourceRegex.exec(status);
     if (matches !== null) {

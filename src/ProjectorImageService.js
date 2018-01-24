@@ -67,8 +67,6 @@ class ProjectorImageService {
   }
 
   async update() {
-    this.log('Refresh projector picture status');
-
     for (let c of this._characteristics) {
       try {
         await this._refreshCharacteristic(c);

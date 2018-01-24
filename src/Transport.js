@@ -1,6 +1,7 @@
 "use strict";
 
 const debug = require('debug')('ESCVP21');
+const serial = require('debug')('ESCVP21:serial');
 
 const SerialPort = require('serialport');
 const EventEmitter = require('events').EventEmitter;
@@ -64,10 +65,10 @@ class Transport extends EventEmitter {
 
   _onSerialPortData(data) {
     data = Buffer.from(data);
-    debug(`SerialPort received ${JSON.stringify(data)}`);
+    serial(`SerialPort received ${JSON.stringify(data)}`);
 
     this._currentRx = Buffer.concat([this._currentRx, data]);
-    debug(`SerialPort now pending ${JSON.stringify(this._currentRx)}`);
+    serial(`SerialPort now pending ${JSON.stringify(this._currentRx)}`);
 
     // Verify if this a complete line
     this._handlePendingData();
@@ -150,7 +151,7 @@ class Transport extends EventEmitter {
       const line = this._currentRx.slice(0, readyMarker + 1).toString('ascii');
       this._currentRx = this._currentRx.slice(readyMarker + 1);
 
-      debug(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
+      serial(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
 
       const pendingRead = this._pendingReads.shift();
       pendingRead(line);
@@ -191,7 +192,7 @@ class Transport extends EventEmitter {
   }
 
   async _synchronize() {
-    debug('Synchronizing with projector...');
+    serial('Synchronizing with projector...');
 
     let synchronized = false;
     for (let attempt = 0; attempt < 3 && synchronized === false; attempt++) {
@@ -202,19 +203,19 @@ class Transport extends EventEmitter {
       }
     }
 
-    debug(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
+    serial(`Synchronization completed... ${synchronized ? 'succesful' : 'FAILED'}`);
     return synchronized;
   }
 
   _drain() {
-    debug('Drain rx queue');
+    serial('Drain rx queue');
     this._currentRx = Buffer.alloc(0);
     this._pendingReads.forEach(p => p(null));
     this._pendingReads = [];
   }
 
   async _sendNullCommand() {
-    debug('Sending empty command to poll status');
+    serial('Sending empty command to poll status');
     try {
       const response = await this._execute('\r', 1000);
 
@@ -223,7 +224,7 @@ class Transport extends EventEmitter {
       return colonPos !== -1 && colonPos === (response.length - 1);
     }
     catch (e) {
-      debug(`Failed to send empty command. ${e}`);
+      serial(`Failed to send empty command. ${e}`);
       return false;
     }
   }

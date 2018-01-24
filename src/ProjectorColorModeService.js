@@ -38,8 +38,6 @@ class ProjectorColorModeService {
   }
 
   async update() {
-    this.log('Refresh projector color status');
-
     const status = await this._device.execute(`CMODE?`);
     const matches = this._cmodeRegex.exec(status);
     if (matches !== null) {

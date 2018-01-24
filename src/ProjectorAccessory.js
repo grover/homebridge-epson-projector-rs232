@@ -139,7 +139,6 @@ class ProjectorAccessory {
   }
 
   async _refreshPowerStatus() {
-    this.log('Refresh projector power status');
     const powerState = await this._device.execute('PWR?');
     const matches = powerRegex.exec(powerState);
     if (matches === null) {
