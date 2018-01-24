@@ -22,7 +22,7 @@ The above models share the same set of commands that are used by this plugin. Ot
 
 After [Homebridge](https://github.com/nfarina/homebridge) has been installed:
 
- ```sudo npm install -g homebridge-epson-projector```
+ ```sudo npm install -g homebridge-epson-projector-rs232 --unsafe-perm```
 
 ### Configuration
 
