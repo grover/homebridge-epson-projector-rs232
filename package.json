@@ -28,5 +28,9 @@
   },
   "devDependencies": {
     "npm-github-release": "^0.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grover/homebridge-epson-projector-rs232.git"
   }
 }
