@@ -7,6 +7,7 @@ const ProjectorBulbService = require('./ProjectorBulbService');
 const ProjectorColorModeService = require('./ProjectorColorModeService');
 const ProjectorImageService = require('./ProjectorImageService');
 const ProjectorInputService = require('./ProjectorInputService');
+const ProjectorPowerStatusService = require('./ProjectorPowerStatusService');
 
 let Characteristic, Service;
 
@@ -46,7 +47,8 @@ class ProjectorAccessory {
       this.getProjectorBulbService(),
       this.getProjectorColorModeService(),
       this.getProjectorImageService(),
-      this.getProjectorInputService()
+      this.getProjectorInputService(),
+      this.getProjectorPowerStatusService()
     ];
   }
 
@@ -97,6 +99,11 @@ class ProjectorAccessory {
     return this._projectorInputService.getService();
   }
 
+  getProjectorPowerStatusService() {
+    this._projetorPowerStatusService = new ProjectorPowerStatusService(this.log, this.api, this._device, this.name);
+    return this._projetorPowerStatusService.getService();
+  }
+
   async _onConnected() {
     this.log('Connected. Refreshing characteristics.');
     await this._refreshSerialNumber();
@@ -112,6 +119,7 @@ class ProjectorAccessory {
       const powerStatus = await this._refreshPowerStatus();
 
       await this._projectorPowerService.update(powerStatus);
+      await this._projetorPowerStatusService.update(powerStatus);
       await this._projectorBulbService.update(powerStatus);
 
       if (powerStatus === '01') {

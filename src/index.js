@@ -9,6 +9,7 @@ const ProjectorBulbServiceTypes = require('./types/ProjectorBulbService');
 const ProjectorColorModeServiceTypes = require('./types/ProjectorColorModeService');
 const ProjectorImageServiceTypes = require('./types/ProjectorImageService');
 const ProjectorInputServiceTypes = require('./types/ProjectorInputService');
+const ProjectorPowerStatusServiceTypes = require('./types/ProjectorPowerStatusService');
 
 const HOMEBRIDGE = {
   Accessory: null,
@@ -34,11 +35,8 @@ module.exports = (homebridge) => {
   ProjectorColorModeServiceTypes.registerWith(homebridge.hap);
   ProjectorImageServiceTypes.registerWith(homebridge.hap);
   ProjectorInputServiceTypes.registerWith(homebridge.hap);
+  ProjectorPowerStatusServiceTypes.registerWith(homebridge.hap);
 }
-
-process.on('uncaughtException', (err) => {
-  console.error(err.toString());
-});
 
 const EpsonProjectorPlatform = class {
   constructor(log, config, api) {
