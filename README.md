@@ -2,6 +2,13 @@
 
 A homebridge plugin to control [Epson EH-TW7200 LCD projectors](https://www.epson.de/products/projectors/home-cinema/epson-eh-tw7200) connected via an RS-232 serial interface. This plugin enables the integration of the projector in HomeKit automations, create rules and scenes that depend upon the state of the projector, and enables scenes to control the TW7200 projector.
 
+## Status
+
+[![HitCount](http://hits.dwyl.io/grover/homebridge-epson-projector-rs232.svg)](https://github.com/grover/homebridge-epson-projector-rs232)
+[![Build Status](https://travis-ci.org/grover/homebridge-epson-projector-rs232.png?branch=master)](https://travis-ci.org/grover/homebridge-epson-projector-rs232)
+[![Node version](https://img.shields.io/node/v/homebridge-epson-projector-rs232.svg?style=flat)](http://nodejs.org/download/)
+[![NPM Version](https://badge.fury.io/js/homebridge-epson-projector-rs232.svg?style=flat)](https://npmjs.org/package/homebridge-epson-projector-rs232)
+
 ## Supported Epson projectors
 
 Epson projectors that have a RS-232 interface are likely to implement the [ESC/VP21 protocol](https://www.google.de/search?q=ESC/VP21+protocol) that is used by this plugin. While the feature set exposed on the interface differs in the projectors, basic functionality should work in almost all of them. Specifically this plugin is compatible with the following models:
