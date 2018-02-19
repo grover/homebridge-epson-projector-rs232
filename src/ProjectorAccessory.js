@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const Transport = require('./Transport');
 
@@ -32,14 +32,14 @@ class ProjectorAccessory {
     this._device.on('connected', this._onConnected.bind(this));
     this._device.on('disconnected', this._onDisconnected.bind(this));
 
-    this._services = this.createServices(this.api.hap);
+    this._services = this.createServices();
   }
 
   getServices() {
     return this._services;
   }
 
-  createServices(homebridge) {
+  createServices() {
     return [
       this.getAccessoryInformationService(),
       this.getBridgingStateService(),

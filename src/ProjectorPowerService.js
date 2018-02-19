@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let Characteristic;
 
@@ -25,9 +25,9 @@ class ProjectorPowerService {
 
   async update(powerStatus) {
     const isOn = ['01', '02'].indexOf(powerStatus) !== -1;
-    const isWarmup = powerStatus === '02';
-    const isCooldown = powerStatus === '03';
-    const isAbnormalStandby = powerStatus === '05';
+    // const isWarmup = powerStatus === '02';
+    // const isCooldown = powerStatus === '03';
+    // const isAbnormalStandby = powerStatus === '05';
 
     this._service
       .getCharacteristic(Characteristic.On)
@@ -50,6 +50,6 @@ class ProjectorPowerService {
       callback(e);
     }
   }
-};
+}
 
 module.exports = ProjectorPowerService;

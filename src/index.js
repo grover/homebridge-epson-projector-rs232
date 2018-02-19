@@ -1,7 +1,6 @@
+'use strict';
 
 const version = require('../package.json').version;
-
-const process = require('process');
 
 const ProjectorAccessory = require('./ProjectorAccessory');
 
@@ -36,12 +35,12 @@ module.exports = (homebridge) => {
   ProjectorImageServiceTypes.registerWith(homebridge.hap);
   ProjectorInputServiceTypes.registerWith(homebridge.hap);
   ProjectorPowerStatusServiceTypes.registerWith(homebridge.hap);
-}
+};
 
 const EpsonProjectorPlatform = class {
   constructor(log, config, api) {
     this.log = log;
-    this.log('Epson Projector Platform Plugin Loaded');
+    this.log(`Epson Projector Platform Plugin Loaded - Version ${version}`);
     this.config = config;
     this.api = api;
 
@@ -60,4 +59,4 @@ const EpsonProjectorPlatform = class {
 
     callback(this._accessories);
   }
-}
+};

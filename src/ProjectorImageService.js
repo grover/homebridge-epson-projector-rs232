@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let Characteristic;
 
@@ -118,6 +118,6 @@ class ProjectorImageService {
       callback(e);
     }
   }
-};
+}
 
 module.exports = ProjectorImageService;

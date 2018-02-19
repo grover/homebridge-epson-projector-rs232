@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let Characteristic;
 
@@ -35,6 +35,6 @@ class ProjectorPowerStatusService {
       .getCharacteristic(Characteristic.ProjectorWarmingUp)
       .updateValue(isWarmingUp);
   }
-};
+}
 
 module.exports = ProjectorPowerStatusService;

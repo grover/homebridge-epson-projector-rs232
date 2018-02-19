@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let Characteristic;
 
@@ -38,7 +38,7 @@ class ProjectorColorModeService {
   }
 
   async update() {
-    const status = await this._device.execute(`CMODE?`);
+    const status = await this._device.execute('CMODE?');
     const matches = this._cmodeRegex.exec(status);
     if (matches !== null) {
       let value = Number.parseInt(matches[1], 16);
@@ -51,7 +51,7 @@ class ProjectorColorModeService {
       }
     }
     else {
-      this.log(`Failed to refresh characteristic state: ${c.cmd}`);
+      this.log(`Failed to refresh characteristic state: CMODE - ${status}`);
     }
   }
 
@@ -72,7 +72,7 @@ class ProjectorColorModeService {
       const cmd = `CMODE ${value}`;
 
       this.log(`Sending ${cmd}`);
-      const response = await this._device.execute(cmd);
+      await this._device.execute(cmd);
       callback(undefined);
 
       this._updateMode(this._lastKnownMode, false);
@@ -83,6 +83,6 @@ class ProjectorColorModeService {
       callback(e);
     }
   }
-};
+}
 
 module.exports = ProjectorColorModeService;

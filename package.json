@@ -4,6 +4,7 @@
   "description": "Homebridge integration for Epson EH-TW7200 projector",
   "main": "src/index.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint src",
     "release": "npm-github-release"
   },
   "keywords": [
@@ -27,6 +28,7 @@
     "homebridge": ">=0.4.32"
   },
   "devDependencies": {
+    "eslint": "^4.18.0",
     "npm-github-release": "^0.9.0"
   },
   "repository": {

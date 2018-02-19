@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const debug = require('debug')('ESCVP21');
 const serial = require('debug')('ESCVP21:serial');
@@ -101,7 +101,7 @@ class Transport extends EventEmitter {
 
         response = await Promise.race([readPromise, timeoutPromise]);
         if (response === null) {
-          debug(`Command execution timed out.`);
+          debug('Command execution timed out.');
           this._synchronize();
         }
       }
@@ -176,18 +176,18 @@ class Transport extends EventEmitter {
   }
 
   _onConnecting() {
-    debug(`Connecting to projector...`);
+    debug('Connecting to projector...');
   }
 
   _onConnected() {
-    debug(`Connected to projector...`);
+    debug('Connected to projector...');
     this._backoff.reset();
 
     // TODO: Initiate connection check timer?
   }
 
   _onDisconnected() {
-    debug(`Disconnected from projector...`);
+    debug('Disconnected from projector...');
     this._backoff.backoff();
   }
 
@@ -244,6 +244,6 @@ class Transport extends EventEmitter {
       setTimeout(() => resolve(null), timeout);
     });
   }
-};
+}
 
 module.exports = Transport;

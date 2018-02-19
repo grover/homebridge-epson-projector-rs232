@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let Characteristic;
 
@@ -34,7 +34,7 @@ class ProjectorInputService {
   }
 
   async update() {
-    const status = await this._device.execute(`SOURCE?`);
+    const status = await this._device.execute('SOURCE?');
     const matches = this._sourceRegex.exec(status);
     if (matches !== null) {
       let source = Number.parseInt(matches[1], 16) & 0xF0;
@@ -47,7 +47,7 @@ class ProjectorInputService {
       }
     }
     else {
-      this.log(`Failed to refresh characteristic state: ${c.cmd}`);
+      this.log(`Failed to refresh characteristic state: SOURCE? => ${status}`);
     }
   }
 
@@ -67,7 +67,7 @@ class ProjectorInputService {
       const cmd = `SOURCE ${value}`;
 
       this.log(`Sending ${cmd}`);
-      const response = await this._device.execute(cmd);
+      await this._device.execute(cmd);
       callback(undefined);
 
       this._updateSource(this._lastKnownSource, false);
@@ -78,6 +78,6 @@ class ProjectorInputService {
       callback(e);
     }
   }
-};
+}
 
 module.exports = ProjectorInputService;

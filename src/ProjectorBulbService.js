@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let Characteristic;
 
@@ -94,6 +94,6 @@ class ProjectorBulbService {
       callback(e);
     }
   }
-};
+}
 
 module.exports = ProjectorBulbService;
