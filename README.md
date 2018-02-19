@@ -87,7 +87,7 @@ If you fork this, go ahead - I'll accept pull requests for enhancements.
 
 ## Contributing
 
-You can contribute to this homebridge platform in following ways:
+You can contribute to this homebridge plugin in following ways:
 
 - [Report issues](https://github.com/grover/homebridge-epson-projector/issues) and help verify fixes as they are checked in.
 - Review the [source code changes](https://github.com/grover/homebridge-epson-projector/pulls).
