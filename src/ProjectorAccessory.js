@@ -127,16 +127,16 @@ class ProjectorAccessory {
         await this._projectorImageService.update();
         await this._projectorInputService.update();
       }
-
-      // Schedule another update
-      setTimeout(() => {
-        this._refreshProjectorStatus();
-      }, this.config.pollingInterval);
     }
     catch (e) {
       // Do not leak the exception
       this.log(`Failed to refresh projector status: ${e}`);
     }
+
+    // Schedule another update
+    setTimeout(() => {
+      this._refreshProjectorStatus();
+    }, this.config.pollingInterval);
   }
 
   async _refreshSerialNumber() {
