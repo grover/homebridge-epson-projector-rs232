@@ -15,6 +15,9 @@ const TransportStates = {
   CONNECTED: 'connected'
 };
 
+function noop() {
+}
+
 class Transport extends EventEmitter {
 
   constructor(port) {
@@ -153,7 +156,7 @@ class Transport extends EventEmitter {
 
       serial(`Processing response ${JSON.stringify(line)}, remaining ${JSON.stringify(this._currentRx)}`);
 
-      const pendingRead = this._pendingReads.shift();
+      const pendingRead = this._pendingReads.shift() || noop;
       pendingRead(line);
     }
   }
@@ -196,7 +199,8 @@ class Transport extends EventEmitter {
 
     let synchronized = false;
     for (let attempt = 0; attempt < 3 && synchronized === false; attempt++) {
-      await this._drain();
+      await this._drainAndFlush();
+
       synchronized = await this._sendNullCommand();
       if (synchronized === false) {
         await this._createTimeout(2000);
@@ -207,11 +211,29 @@ class Transport extends EventEmitter {
     return synchronized;
   }
 
-  _drain() {
-    serial('Drain rx queue');
-    this._currentRx = Buffer.alloc(0);
-    this._pendingReads.forEach(p => p(null));
-    this._pendingReads = [];
+  _drainAndFlush() {
+    return new Promise((resolve, reject) => {
+      serial('Drain rx queue');
+      this._currentRx = Buffer.alloc(0);
+      this._pendingReads.forEach(p => p(null));
+      this._pendingReads = [];
+
+      this._port.flush(err => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        this._port.drain(err => {
+          if (err) {
+            reject(err);
+            return;
+          }
+
+          resolve();
+        });
+      });
+    });
   }
 
   async _sendNullCommand() {
